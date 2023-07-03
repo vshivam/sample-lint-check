@@ -1,0 +1,31 @@
+plugins {
+    id 'java-library'
+    id 'org.jetbrains.kotlin.jvm'
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
+}
+
+kotlin {
+    jvmToolchain {
+        languageVersion.set(JavaLanguageVersion.of(JavaVersion.VERSION_11.toString()))
+    }
+}
+
+dependencies {
+    compileOnly "com.android.tools.lint:lint-api:30.4.1"
+    compileOnly "com.android.tools.lint:lint-checks:30.4.1"
+
+    testImplementation 'junit:junit:4.13.2'
+    testImplementation("com.android.tools.lint:lint:30.4.1")
+    testImplementation("com.android.tools.lint:lint-tests:30.4.1")
+    testImplementation("com.android.tools:testutils:30.4.1")
+}
+
+jar {
+    manifest {
+        attributes("Lint-Registry-v2": "com.sample.checks.IssueRegistry")
+    }
+}
